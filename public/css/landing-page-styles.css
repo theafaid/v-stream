@@ -1,0 +1,323 @@
+/*
+
+Template Name: SKRN Progression
+Template URI: http://progression-studios.com/skrn/
+Author: Progression Studios
+Author URI: https://progressionstudios.com/
+Description: Media Streaming App Site Template
+Version: 1.0
+License: GNU General Public License version 3.0
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
+
+*/
+
+
+/*  Table of Contents
+01. MAIN STYLES
+
+
+*/
+
+
+/*
+=============================================== 01. MAIN CONTAINER STYLES ===============================================
+*/
+body {
+	background:#f9f9f9;
+}
+
+#progression-studios-landing-page-container {
+	width:1200px;
+	margin:40px auto 50px auto;
+	background:#ffffff;
+	border:1px solid rgba(0,0,0, 0.07);
+	box-shadow: 0px 0px 25px rgba(0,0,0,  0.1);
+	border-radius:5px;
+}
+
+/* ======== #Mobile (0px-767px) ======== */
+@media only screen and (max-width: 1300px) {
+	#progression-studios-landing-page-container {
+		width:90%;
+	}
+}
+
+header#progression-studios-landing-header {
+	background-color:#3db13d;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	text-align:center;
+	background-repeat: no-repeat;
+	background-position:center center;
+	background-size: cover;
+	background-image:url("../images/demo/landing-page-header.jpg");
+	position:relative;
+	overflow:hidden;
+}
+
+.pro-triangle-seperator:after,.pro-triangle-seperator:before {
+    content:'';
+    position:absolute;
+    bottom:0px;
+    width:50%;
+    z-index:20;
+    border-bottom:80px solid #ffffff;
+    -moz-transform:rotate(0.000001deg);
+    -webkit-transform:rotate(0.000001deg);
+    -o-transform:rotate(0.000001deg);
+    -ms-transform:rotate(0.000001deg);
+    transform:rotate(0.000001deg);}
+ 
+.pro-triangle-seperator:before{
+    right:50%;
+    border-right:1000px solid transparent;
+    border-left:1000px solid;}
+ 
+.pro-triangle-seperator:after{
+    left:50%;
+    border-left:1000px solid transparent;
+    border-right:1000px solid;
+}
+
+#progression-studios-landing-icons {
+	margin-top:55px;
+	background-repeat: no-repeat;
+	background-position:center center;
+	background-size: 600px 313px;
+	background-image:url("../images/demo/landing-page-icons.png");
+	padding:116px 0px 120px 0px;
+	margin-bottom:275px;
+}
+
+
+
+header#progression-studios-landing-header h1 {
+	color:#ffffff;
+	font-family: 'Lato', sans-serif;
+	font-weight:900;
+	font-size:60px;
+	margin-bottom:8px;
+	text-shadow: 0px 2px 28px rgba(0,0,0, 0.2);
+}
+
+header#progression-studios-landing-header h3 {
+	font-weight:400;
+	margin-bottom:5px;
+	font-size:14px;
+	text-transform:uppercase;
+	color:#ffffff;
+	letter-spacing:0.03em;
+	text-shadow: 0px 1px 2px rgba(0,0,0, 0.1);
+}
+
+a#landing-page-dashboard-screenshot {
+	display:block;
+	max-width:90%;
+	width:980px;
+	margin:-220px auto 120px auto;
+	position:relative;
+	z-index:30;
+}
+
+a#landing-page-dashboard-screenshot img {
+	border-radius:8px;
+	box-shadow: 0px 0px 40px rgba(0,0,0,  0.15);
+}
+
+
+/*
+=============================================== 02. CONTENT STYLES ===============================================
+*/
+#landing-page-container {
+	padding:0px;
+}
+
+#landing-page-container h2 {
+	position:relative;
+	font-size:22px;
+	padding-left:112px;
+}
+
+#landing-page-container h2:after {
+	position:absolute;
+	content:"";
+	display:block;
+	left:0px;
+	top:15px;
+	height:3px;
+	width:70px;
+	background:#36b938;
+}
+
+
+a.landing-page-screenshot {
+	display:block;
+	max-width:90%;
+	width:980px;
+	margin:45px auto 130px auto;
+	position:relative;
+	z-index:30;
+}
+
+a.landing-page-screenshot img {
+	border-radius:8px;
+	box-shadow: 0px 0px 40px rgba(0,0,0,  0.15);
+}
+
+
+a#landing-page-dashboard-screenshot,
+a.landing-page-screenshot {
+	transition-duration: 300ms; 
+	transition-property: all; 
+	transition-timing-function: ease-in-out;
+}
+
+a#landing-page-dashboard-screenshot:hover,
+a.landing-page-screenshot:hover {
+	-webkit-transform: translateY(-8px);
+	transform: translateY(-8px);
+}
+
+
+
+/*
+=============================================== 03. FOOTER STYLES ===============================================
+*/
+footer#landing-page-footer {
+	border-bottom-left-radius:5px;
+	border-bottom-right-radius:5px;
+	background-repeat: no-repeat;
+	background-position:center center;
+	background-size: cover;
+	position:relative;
+	text-align:center;
+	background:#dddddd;
+	padding:160px 10px;
+	background-image:url("../images/demo/footer-image.jpg");
+}
+
+footer#landing-page-footer h3 {
+	font-size:50px;
+	margin-bottom:12px;
+	letter-spacing:0.01em;
+}
+
+footer#landing-page-footer h6 {
+	color:rgba(0,0,0,  0.5);
+	font-weight:300;
+	margin-bottom:35px;
+	font-size:18px;
+	letter-spacing:0.02em;
+}
+
+
+
+
+
+
+/*
+=============================================== 24. RESPONSIVE STYLES ===============================================
+*/
+/* ======== #DESKTOP (959px-1100px) ======== */
+@media only screen and (min-width: 959px) and (max-width: 1100px) {
+	
+	#landing-page-container h2 {
+		padding-left:90px;
+	}
+
+	#landing-page-container h2:after {
+		width:60px;
+	}
+}
+
+/* ======== #Tablet (768px-959px) ======== */
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+	
+	#landing-page-container h2 {
+		padding-left:60px;
+	}
+
+	#landing-page-container h2:after {
+		width:40px;
+	}
+	
+	#progression-studios-landing-page-container {
+		width:96%;
+		margin-bottom:30px;
+	}
+	
+	
+	footer#landing-page-footer h3 {
+		font-size:36px;
+		margin-bottom:10px;
+	}
+
+	footer#landing-page-footer h6 {
+		margin-bottom:30px;
+		font-size:15px;
+	}
+	
+
+}
+
+/* ======== #Mobile (0px-767px) ======== */
+@media only screen and (max-width: 767px) {
+	
+	
+	#progression-studios-landing-icons {
+		margin-top:50px;
+		margin-bottom:170px;
+		padding-top:120px;
+	}
+	
+	
+	header#progression-studios-landing-header h1 {
+		font-size:50px;
+	}
+
+	header#progression-studios-landing-header h3 {
+		font-size:13px;
+		letter-spacing:0.02em;	
+	}
+	
+	a#landing-page-dashboard-screenshot {
+		margin:-120px auto 120px auto;
+	}
+	
+	
+	#landing-page-container h2 {
+		padding-left:60px;
+		font-size:18px;
+	}
+
+	#landing-page-container h2:after {
+		width:40px;
+		top:10px;
+	}
+	
+	
+	#progression-studios-landing-page-container {
+		width:100%;
+		margin-bottom:0px;
+	}
+
+	
+	footer#landing-page-footer h3 {
+		font-size:30px;
+		margin-bottom:10px;
+	}
+
+	footer#landing-page-footer h6 {
+		margin-bottom:25px;
+		font-size:14px;
+	}
+	
+	.btn.btn-lg {
+		padding:12px 20px;
+		font-size:13px;
+	}
+	
+	
+}
+
+
