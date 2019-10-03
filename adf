@@ -1,0 +1,35 @@
+[33mcommit caae27923789c278d30ef6545d22840928b52bf6[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: abdulrahmanFaid <abdulrahman_faid@outlook.com>
+Date:   Thu Oct 3 19:43:04 2019 +0200
+
+    Remove additional failed-jobs file
+
+[33mcommit b0e8035645eca961a212758d9148a27223ef5f2e[m
+Author: abdulrahmanFaid <abdulrahman_faid@outlook.com>
+Date:   Thu Oct 3 19:42:16 2019 +0200
+
+    Setup queues
+
+[33mcommit 03ccf5731f677dd3d5310efc7060612d09e23d87[m
+Author: abdulrahmanFaid <abdulrahman_faid@outlook.com>
+Date:   Thu Oct 3 19:40:27 2019 +0200
+
+    Setup channel_user relations'
+
+[33mcommit ceb7289ec5296d99cd3fcad75f059c3afa4e7ba3[m
+Author: abdulrahmanFaid <abdulrahman_faid@outlook.com>
+Date:   Thu Oct 3 19:39:41 2019 +0200
+
+    Change models directory
+
+[33mcommit 9ba1c31b6c49e72b87a026c30e74a2e28b160297[m
+Author: abdulrahmanFaid <abdulrahman_faid@outlook.com>
+Date:   Thu Oct 3 19:37:35 2019 +0200
+
+    Setup Channels
+
+[33mcommit 718d48159bfb1d25167bee52d3fe3f1bc38b209c[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m
+Author: abdulrahmanFaid <abdulrahman_faid@outlook.com>
+Date:   Thu Oct 3 18:38:30 2019 +0200
+
+    init Files'

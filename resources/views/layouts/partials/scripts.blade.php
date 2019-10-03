@@ -8,3 +8,8 @@
 <script src="{{asset('/')}}js/navigation.js" defer></script><!-- Header Navigation JS Plugin -->
 <script src="{{asset('/')}}js/jquery.flexslider-min.js" defer></script><!-- FlexSlider JS Plugin -->
 <script src="{{asset('/')}}js/script.js" defer></script><!-- Custom Document Ready JS -->
+<script src="{{asset('/')}}js/jquery-asRange.min.js" defer></script><!-- Range Slider JS Plugin -->
+<script src="{{asset('/')}}js/circle-progress.min.js" defer></script><!-- Circle Progress JS Plugin -->
+<script src="{{asset('/')}}js/afterglow.min.js" defer></script><!-- Video Player JS Plugin -->
+<script src="{{asset('/')}}js/script-dashboard.js" defer></script><!-- Custom Document Ready JS -->
+
