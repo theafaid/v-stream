@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Channels\ChannelUpdateRequest;
+use App\Models\Channel;
+use App\Services\Channels\ChannelUpdateService;
 use Illuminate\Http\Request;
 
 class ChannelController extends Controller
@@ -48,27 +51,28 @@ class ChannelController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Show the form for editing the specified resource.
+     * @param Channel $channel
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function update(Request $request, $id)
+    public function edit(Channel $channel)
     {
-        //
+        return view('channels.edit', compact('channel'));
+    }
+
+
+    /**
+     * @param Channel $channel
+     * @param ChannelUpdateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Channel $channel, ChannelUpdateRequest $request)
+    {
+        app(ChannelUpdateService::class)->handle($channel, $request->validated());
+
+        return back();
     }
 
     /**
