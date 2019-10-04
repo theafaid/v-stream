@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="39085e01-00b6-48f2-94a3-d2a1c5ea7ceb" name="Default Changelist" comment="" />
+    <list default="true" id="39085e01-00b6-48f2-94a3-d2a1c5ea7ceb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_04_142627_create_playlists_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_04_142627_create_playlists_table.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,11 +44,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="390">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2019_10_04_142627_create_playlists_table.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="468">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
             </state>
           </provider>
         </entry>
@@ -160,6 +171,7 @@
         <option value="$PROJECT_DIR$/app/Services/Channels/ChannelUpdateService.php" />
         <option value="$PROJECT_DIR$/app/Jobs/Channels/UploadChannelImage.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_10_04_142627_create_playlists_table.php" />
       </list>
     </option>
   </component>
@@ -371,12 +383,12 @@
       <option name="presentableId" value="Default" />
       <updated>1570118755331</updated>
       <workItem from="1570118756614" duration="9555000" />
-      <workItem from="1570176104974" duration="16898000" />
+      <workItem from="1570176104974" duration="17037000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26453000" />
+    <option name="totallyTimeSpent" value="26592000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1066" extended-state="6" />
@@ -409,13 +421,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/partials/scripts.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="8" column="31" lean-forward="true" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Downloads/Compressed/skrnhtml/SKRN - Main/SKRN - HTML Files/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
@@ -756,8 +761,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="390">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_10_04_142627_create_playlists_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
         </state>
       </provider>
     </entry>
