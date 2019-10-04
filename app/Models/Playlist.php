@@ -1,8 +1,7 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\Models\Channel;
 use Illuminate\Database\Eloquent\Model;
 
 class Playlist extends Model

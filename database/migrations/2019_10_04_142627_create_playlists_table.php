@@ -16,7 +16,8 @@ class CreatePlaylistsTable extends Migration
         Schema::create('playlists', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->unsignedBigInteger('channel_id');
+            $table->string('slug')->unique();
+            $table->unsignedBigInteger('channel_id')->index();
             $table->timestamps();
 
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
