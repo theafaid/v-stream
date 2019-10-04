@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ChannelPlaylists\PlaylistStoreRequest;
 
 class ChannelPlaylistsController extends Controller
 {
@@ -26,15 +27,10 @@ class ChannelPlaylistsController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store(PlaylistStoreRequest $request)
     {
-        //
+
     }
 
     /**
