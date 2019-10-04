@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Http\Requests\ChannelPlaylists;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class PlaylistStoreRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        $playlist = $this->route('playlist');
+
+        return $playlist->ownedBy($this->user());
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            //
+        ];
+    }
+}
