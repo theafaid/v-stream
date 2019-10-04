@@ -58,6 +58,3 @@
     </div>
 </footer>
 
-<script src="/js/dashboard.js"></script>
-<!-- Input Mask Plugin -->
-<script src="/plugins/input-mask/plugin.js"></script>
