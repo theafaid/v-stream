@@ -16,7 +16,9 @@ class ChannelController extends Controller
      */
     public function index()
     {
-        return view('channels.index');
+        return view('channels.index', [
+            'channels' => auth()->user()->channels
+        ]);
     }
 
     /**

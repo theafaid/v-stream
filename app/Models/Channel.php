@@ -8,6 +8,7 @@ class Channel extends Model
 {
     protected $guarded = [];
 
+    protected $withCount = ['playlists'];
     /**
      * @return string
      */
@@ -31,5 +32,10 @@ class Channel extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function playlists()
+    {
+        return $this->hasMany(Playlist::class);
     }
 }
