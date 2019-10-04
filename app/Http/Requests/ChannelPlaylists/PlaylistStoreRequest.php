@@ -13,9 +13,7 @@ class PlaylistStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        $channel = $this->route('channel');
-
-        return $channel->ownedBy($this->user());
+        return true;
     }
 
     /**

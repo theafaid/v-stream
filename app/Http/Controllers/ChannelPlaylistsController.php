@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Channel;
+use App\Services\ChannelPlaylists\PlaylistStoreService;
 use Illuminate\Http\Request;
 use App\Http\Requests\ChannelPlaylists\PlaylistStoreRequest;
 
@@ -19,18 +21,25 @@ class ChannelPlaylistsController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Channel $channel
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function create()
+    public function create(Channel $channel)
     {
-        //
+        $this->authorize('update', $channel);
+
+        return view('playlists.create', compact('channel'));
     }
 
 
-    public function store(PlaylistStoreRequest $request)
+    public function store(Channel $channel, PlaylistStoreRequest $request)
     {
+        $this->authorize('update', $channel);
 
+        app(PlaylistStoreService::class)->handle($channel, $request->validated());
+
+        return redirect()->route('channels.show', $channel->slug);
     }
 
     /**

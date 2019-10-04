@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Channels\ChannelUpdateRequest;
 use App\Models\Channel;
+use App\Services\Channels\ChannelUpdateService;
 use App\Services\Channels\PlaylistStoreService;
 use Illuminate\Http\Request;
 
@@ -72,7 +73,7 @@ class ChannelController extends Controller
      */
     public function update(Channel $channel, ChannelUpdateRequest $request)
     {
-        app(PlaylistStoreService::class)->handle($channel, $request->validated());
+        app(ChannelUpdateService::class)->handle($channel, $request->validated());
 
         return redirect()->route('channels.edit', $channel->slug);
     }
