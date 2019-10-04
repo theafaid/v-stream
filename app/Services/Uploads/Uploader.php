@@ -14,7 +14,7 @@ class Uploader
         $this->file = $file;
 
         if(is_a($service = $this->uploadService(), UploadInterface::class)) {
-            return $service->save($path)->getFileName();
+            return $service->save($path)->getFilePath();
         }
 
         return null;

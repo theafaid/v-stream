@@ -7,7 +7,7 @@ use App\Services\Uploads\Contracts\UploadInterface;
 
 class LocalFileUploadService implements UploadInterface
 {
-    private $file, $fileName;
+    private $file, $fileName, $path;
 
     public function __construct(UploadedFile $file)
     {
@@ -16,6 +16,8 @@ class LocalFileUploadService implements UploadInterface
 
     public function save($path)
     {
+        $this->path = $path;
+
         $this->file->storeAs($path, $this->generateFileName());
 
         return $this;
@@ -29,5 +31,10 @@ class LocalFileUploadService implements UploadInterface
     public function getFileName()
     {
         return $this->fileName;
+    }
+
+    public function getFilePath()
+    {
+        return "/storage/" . $this->path . "/" . $this->getFileName();
     }
 }

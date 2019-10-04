@@ -9,9 +9,18 @@ Edit {{$channel->name}}
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
-
+                    <div class="card p-3">
+                        <a href="javascript:void(0)" class="mb-3">
+                            <img src="{{$channel->image_filename}}" alt="Photo by Peter Richards" class="rounded">
+                        </a>
+                    </div>
                 </div>
                 <div class="col-lg-8">
+                    @if(session()->has('success'))
+                        <div class="alert alert-success">
+                            {{session('success')}}
+                        </div>
+                    @endif
                     <form class="card" enctype="multipart/form-data" method="POST" action="{{route('channels.update', $channel->slug)}}">
                         @csrf
                         {{method_field('PATCH')}}
@@ -53,7 +62,7 @@ Edit {{$channel->name}}
                                 </div>
                             </div>
                             <div class="card-footer text-right">
-                                <button type="submit" class="btn btn-primary">Update Profile</button>
+                                <button type="submit" class="btn btn-primary">Update My Channel</button>
                             </div>
                         </div>
                     </form>
