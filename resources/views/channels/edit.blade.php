@@ -5,50 +5,60 @@ Edit {{$channel->name}}
 @endsection
 
 @section('content')
-    <main id="col-main">
-        <div class="dashboard-container">
-            <div class="container-fluid">
-                <form method="POST" action="{{route('channels.update', $channel->slug)}}">
-                    @csrf
-                    {{method_field('PATCH')}}
-                    <div class="row">
-                            <div class="col-md-4  col-lg-3">
-                                <div id="account-edit-photo">
-                                    <div><img src="http://via.placeholder.com/400x400.jpg" alt="Account Image"></div>
+    <div class="my-3 my-md-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+
+                </div>
+                <div class="col-lg-8">
+                    <form class="card" enctype="multipart/form-data" method="POST" action="{{route('channels.update', $channel->slug)}}">
+                        @csrf
+                        {{method_field('PATCH')}}
+                        <div class="card-body">
+                            <h3 class="card-title">Edit {{$channel->name}}</h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Channel Name</label>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Name" value="{{old('name') ?: $channel->name}}">
+                                        @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div><!-- close .col -->
-                            <div class="col-md-8">
-                                <h5>{{$channel->name}} Information</h5>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-form-label">Channel Name:</label>
-                                            <input type="text" class="form-control" name="name" value="{{old('name') ?: $channel->name}}">
-                                        </div>
-                                    </div><!-- close .col -->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-form-label">Channel Image:</label>
-                                            <input type="file" class="form-control">
-                                        </div>
-                                    </div><!-- close .col -->
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Channel Image</label>
+                                        <input type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                                        @error('image')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label class="col-form-label">Channel Description:</label>
-                                            <textarea class="form-control" name="description" rows="12">{{old('description') ?: $channel->description}}</textarea>
-                                        </div>
-                                    </div><!-- close .col -->
-                                    <div class="col-md-5">
-                                        <button type="submit" class="btn btn-success">Update</button>
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Channel Description</label>
+                                        <textarea class="form-control @error('description') is-invalid @endif" rows="13" name="description">{{old('description') ?: $channel->description}}</textarea>
+                                        @error('description')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
-                    </div><!-- close .row -->
-                </form>
-            </div><!-- close .container-fluid -->
-
-        </div><!-- close .dashboard-container -->
-    </main>
+                            <div class="card-footer text-right">
+                                <button type="submit" class="btn btn-primary">Update Profile</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
