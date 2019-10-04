@@ -2,44 +2,68 @@
 
 namespace App\Services\Channels;
 
-use App\Repositories\ChannelRepository;
-use App\Services\Uploads\Uploader;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use App\Repositories\ChannelRepository;
+use App\Jobs\Channels\UploadChannelImage;
 
 class ChannelUpdateService
 {
     const IMAGE_PATH = 'channels/images';
+
     protected $channels, $uploader;
 
-    public function __construct(ChannelRepository $channels, Uploader $uploader)
+    /**
+     * ChannelUpdateService constructor.
+     * @param ChannelRepository $channels
+     */
+    public function __construct(ChannelRepository $channels)
     {
         $this->channels = $channels;
-        $this->uploader = $uploader;
     }
 
+    /**
+     * @param $channel
+     * @param $request
+     */
     public function handle($channel, $request)
     {
         $this->channels->update($channel, $this->handleData($request));
 
+        if(isset($request['image']) && $request['image']) {
+            $this->handleUploadFile($channel, $request['image']);
+        }
+
         session()->flash('success', 'Channel updated successfully');
     }
 
+    /**
+     * @param $data
+     * @return array
+     */
     protected function handleData($data)
     {
-        $data['image_filename'] = isset($data['image']) ? $this->handleUploadFile($data['image']) : null;
         $data['slug'] = Str::slug($data['name']);
 
         return Arr::only($data, $this->fields());
     }
 
-    protected function handleUploadFile($file)
+    /**
+     * @param $channel
+     * @param $file
+     */
+    protected function handleUploadFile($channel, $file)
     {
-        return $this->uploader->upload($file, self::IMAGE_PATH);
+        $file->move(storage_path('uploads'), $fileId = uniqid(true));
+
+        UploadChannelImage::dispatch($channel, $fileId, self::IMAGE_PATH);
     }
 
+    /**
+     * @return array
+     */
     protected function fields()
     {
-        return ['image_filename', 'name', 'description', 'slug'];
+        return ['name', 'description', 'slug'];
     }
 }

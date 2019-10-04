@@ -2,6 +2,7 @@
 
 namespace App\Services\Uploads;
 
+use App\Jobs\UploadChannelImage;
 use App\Services\Uploads\Contracts\UploadInterface;
 use Illuminate\Http\UploadedFile;
 
@@ -18,6 +19,10 @@ class Uploader
         }
 
         return null;
+
+//        $file->move(storage_path('uploads'), $fileId = uniqid(true));
+
+//        $this->dispatch(new UploadChannelImage($c))
     }
 
     protected function fileSystemDriver()

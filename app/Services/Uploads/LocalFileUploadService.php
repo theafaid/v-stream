@@ -16,7 +16,12 @@ class LocalFileUploadService implements UploadInterface
 
     public function save($path)
     {
+        // Move to temp location
+        $this->file->move(storage_path('uploads'), uniqid(true));
+        // Dispatch a job
         $this->path = $path;
+
+        return $this;
 
         $this->file->storeAs($path, $this->generateFileName());
 
