@@ -72,7 +72,7 @@ class ChannelController extends Controller
     {
         app(ChannelUpdateService::class)->handle($channel, $request->validated());
 
-        return back();
+        return redirect()->route('channels.edit', $channel->slug);
     }
 
     /**

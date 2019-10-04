@@ -29,7 +29,7 @@ class ChannelUpdateRequest extends FormRequest
         return [
             'name' => 'required|string|max:30|unique:channels,name,' . $this->channel->id,
             'description' => 'sometimes|nullable|string|max:5000',
-            'image_filename' => 'nullable|file|mimes:jpg,png,jpeg|distinct',
+            'image' => 'sometimes|image|mimes:jpg,png,jpeg',
         ];
     }
 }

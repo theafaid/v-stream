@@ -2,6 +2,7 @@
 
 namespace App\Services\Uploads\Contracts;
 
-class UploadInterface
+interface UploadInterface
 {
+
 }

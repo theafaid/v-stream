@@ -3,31 +3,43 @@
 namespace App\Services\Channels;
 
 use App\Repositories\ChannelRepository;
-use App\Services\Uploads\LocalFileUploadService;
+use App\Services\Uploads\Uploader;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class ChannelUpdateService
 {
     const IMAGE_PATH = 'channels/images';
-    protected $channels;
+    protected $channels, $uploader;
 
-    public function __construct(ChannelRepository $channels)
+    public function __construct(ChannelRepository $channels, Uploader $uploader)
     {
         $this->channels = $channels;
+        $this->uploader = $uploader;
     }
 
     public function handle($channel, $request)
     {
-        dd($request);
-        $this->channels->update($channel, array_merge($request, [
-                'slug' => Str::slug($request['name']),
-                'image_filename' => $this->handleFileUpload($request['image_filename'])->getFileName(),
-            ])
-        );
+        $this->channels->update($channel, $this->handleData($request));
+
+        session()->flash('success', 'Channel updated successfully');
     }
 
-    protected function handleFileUpload($file)
+    protected function handleData($data)
     {
-        return ( new LocalFileUploadService($file))->save(self::IMAGE_PATH);
+        $data['image_filename'] = isset($data['image']) ? $this->handleUploadFile($data['image']) : null;
+        $data['slug'] = Str::slug($data['name']);
+
+        return Arr::only($data, $this->fields());
+    }
+
+    protected function handleUploadFile($file)
+    {
+        return $this->uploader->upload($file, self::IMAGE_PATH);
+    }
+
+    protected function fields()
+    {
+        return ['image_filename', 'name', 'description', 'slug'];
     }
 }

@@ -3,8 +3,9 @@
 namespace App\Services\Uploads;
 
 use Illuminate\Http\UploadedFile;
+use App\Services\Uploads\Contracts\UploadInterface;
 
-class LocalFileUploadService
+class LocalFileUploadService implements UploadInterface
 {
     private $file, $fileName;
 

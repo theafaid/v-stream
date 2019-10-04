@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Channel;
+use Illuminate\Support\Arr;
 
 class ChannelRepository
 {

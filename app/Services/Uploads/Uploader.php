@@ -3,15 +3,18 @@
 namespace App\Services\Uploads;
 
 use App\Services\Uploads\Contracts\UploadInterface;
+use Illuminate\Http\UploadedFile;
 
 class Uploader
 {
     protected $file;
 
-    public function upload($file, $path)
+    public function upload(UploadedFile $file, $path)
     {
+        $this->file = $file;
+
         if(is_a($service = $this->uploadService(), UploadInterface::class)) {
-            return $service->save($file, $path)->getFileName();
+            return $service->save($path)->getFileName();
         }
 
         return null;
@@ -19,15 +22,16 @@ class Uploader
 
     protected function fileSystemDriver()
     {
-        if($this->driver) return $this->driver;
+        $driver = config('filesystems.default');
 
-        return config('filesystems.default');
+        return in_array($driver, ['local', 'public']) ? 'local' : $driver;
     }
 
     protected function uploadService()
     {
-        $uploadServiceName =  ucfirst($this->fileSystemDriver()) . "FileUploadService";
 
-        return new $uploadServiceName;
+        $uploadService =  "\\App\Services\\Uploads\\" . ucfirst($this->fileSystemDriver()) . "FileUploadService";
+        
+        return new  $uploadService ($this->file);
     }
 }
