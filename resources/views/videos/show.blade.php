@@ -5,5 +5,9 @@
 @endsection
 
 @section('content')
-
+    <div class="my-3 my-md-5">
+        <div class="container">
+            <video-page></video-page>
+        </div>
+    </div>
 @endsection
