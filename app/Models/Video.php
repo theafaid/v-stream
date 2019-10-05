@@ -20,6 +20,30 @@ class Video extends Model
     }
 
     /**
+     * @return bool
+     */
+    public function votesAllowed()
+    {
+        return !! $this->allow_votes;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function upVotes()
+    {
+        return $this->votes->where('up', true);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function downVotes()
+    {
+        return $this->votes->where('up', false);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function playlist()

@@ -9,14 +9,7 @@
 
                 </div>
                 <div class="card-footer">
-                    <span class="float-right">
-                        <button class="btn btn-light">
-                            <i class="fa fa-thumbs-up"></i>
-                        </button>
-                        <button class="btn btn-light">
-                            <i class="fa fa-thumbs-down"></i>
-                        </button>
-                    </span>
+                    <vote-buttons :video-uid="video.uid"></vote-buttons>
                 </div>
             </div>
         </div>
@@ -26,7 +19,13 @@
 </template>
 
 <script>
-    export default {
+    import Voting from '../public/Voting';
 
+    export default {
+        props: ['video'],
+
+        components: {
+            VoteButtons: Voting,
+        }
     }
 </script>

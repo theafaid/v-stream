@@ -19,6 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/videos/{video}', 'VideoController@index')->name('video.index');
+Route::get('/videos/{video}/votes', 'VideoVotesController@show')->name('video.votes.show');
+Route::get('/videos/{video}/votes', 'VideoVotesController@store')->name('video.votes.store');
+Route::delete('/videos/{video}/votes', 'VideoVotesController@destroy')->name('video.votes.destroy');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('/channels', 'ChannelController');
     Route::resource('/channels/{channel}/playlists', 'ChannelPlaylistsController');
@@ -26,7 +31,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/channels/{channel}/upload', 'VideoUploadController@store')->name('upload.store');
     Route::post('/channels/{channel}/playlists/{playlist}/upload', 'VideoUploadController@store')->name('upload.store');
 
-    Route::get('/videos/{video}', 'VideoController@index')->name('video.index');
 
     Route::resource('/channels/{channel}/playlists/{playlist}/videos', 'VideoController');
 });
