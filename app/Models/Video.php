@@ -34,4 +34,12 @@ class Video extends Model
     {
         return $this->playlist->channel;
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function votes()
+    {
+        return $this->morphMany(Vote::class,'votable');
+    }
 }
