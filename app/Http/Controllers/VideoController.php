@@ -15,9 +15,9 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Video $video)
     {
-        dd(request()->all());
+        return view('videos.show', compact('video'));
     }
 
     /**
