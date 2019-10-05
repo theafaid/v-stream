@@ -29,4 +29,5 @@ Vue.component('video-upload', require('./components/videos/Upload.vue').default)
 
 const app = new Vue({
     el: '#app',
+    data: window.site
 });

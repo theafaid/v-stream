@@ -26,6 +26,14 @@
         requirejs.config({
             baseUrl: '.'
         });
+
+        window.site = {
+            url: "{{config('app.url')}}",
+            user: {
+                id: "{{auth()->check() ? auth()->id() : null}}",
+                authenticated: "{{auth()->check()}}"
+            }
+        };
     </script>
 
 </head>

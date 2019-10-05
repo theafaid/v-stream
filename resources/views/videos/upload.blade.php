@@ -5,12 +5,12 @@ Upload Video
 @endsection
 
 @section('content')
-    <div class="my-3 my-md-5 mt-lg-9 mt-md-9">
+    <div class="my-3 my-md-2 mt-lg-2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3"></div>
                 <div class="col-lg-6">
-                    <video-upload :playlists="{{$playlists}}"></video-upload>
+                    <video-upload :playlists="{{$playlists}}" :channel="{{$channel}}"></video-upload>
                 </div>
             </div>
         </div>

@@ -1838,12 +1838,202 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['playlists']
+  props: ['playlists', 'channel'],
+  data: function data() {
+    return {
+      loading: false,
+      uploading: false,
+      uploadCompleted: false,
+      failed: false,
+      playlist: "",
+      file: null,
+      uid: null,
+      saveStatus: null,
+      fileProgress: 0,
+      form: {
+        title: "Untitled",
+        description: null,
+        visibility: 'public'
+      }
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    window.onbeforeunload = function () {
+      if (_this.uploading && !_this.uploadCompleted && !_this.failed) {
+        return 'Your video is uploading! Are you sure to leave ?';
+      }
+    };
+  },
+  computed: {
+    canStore: function canStore() {
+      return this.file && this.playlist;
+    },
+    canUpdate: function canUpdate() {
+      return !!this.uid;
+    },
+    fileExtension: function fileExtension() {
+      return this.file.name.split('.').pop();
+    },
+    videoUrl: function videoUrl() {
+      return "".concat(this.$root.url, "/videos/").concat(this.uid);
+    }
+  },
+  methods: {
+    changed: function changed(e) {
+      var _this2 = this;
+
+      this.failed = false;
+      this.uploading = true;
+      this.uploadCompleted = false;
+      this.file = e.target.files[0];
+      this.store().then(function (_ref) {
+        var data = _ref.data;
+        _this2.uid = data.uid;
+
+        _this2.upload();
+      })["catch"](function () {
+        return _this2.failed = true;
+      });
+    },
+    upload: function upload() {
+      var _this3 = this;
+
+      var form = new FormData();
+      form.append('video', this.file);
+      form.append('uid', this.uid);
+      form.append('playlist', this.playlist);
+      axios.post(location.pathname, form, {
+        onUploadProgress: function onUploadProgress(e) {
+          if (e.lengthComputable) _this3.updateProgress(e);
+        }
+      }).then(function () {
+        _this3.uploadCompleted = true;
+        _this3.uploading = false;
+      })["catch"](function () {
+        return _this3.failed = true;
+      });
+    },
+    updateProgress: function updateProgress(e) {
+      this.fileProgress = e.loaded * 100 / e.total;
+    },
+    store: function store() {
+      if (this.canStore) {
+        return axios.post(this.endpoint(), _objectSpread({}, {
+          extension: this.fileExtension
+        }, {}, this.form));
+      }
+    },
+    update: function update() {
+      if (this.canUpdate) {
+        this.loading = true;
+        this.saveStatus = 'Saving Changes ...';
+        this.persistUpdate();
+      }
+    },
+    persistUpdate: function persistUpdate() {
+      var _this4 = this;
+
+      axios.patch(this.endpoint(this.uid), this.form).then(function (response) {
+        return _this4.updateSucceeded();
+      })["catch"](function (error) {
+        return _this4.updateFailed();
+      });
+    },
+    updateSucceeded: function updateSucceeded(response) {
+      var _this5 = this;
+
+      this.loading = false;
+      this.saveStatus = 'Changes Saved Successfully';
+      setTimeout(function () {
+        _this5.saveStatus = null;
+      }, 2500);
+    },
+    updateFailed: function updateFailed(response) {
+      this.loading = false;
+      this.saveStatus = 'Failed To Save Changes !';
+    },
+    endpoint: function endpoint() {
+      var segments = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      return "/channels/".concat(this.channel.slug, "/playlists/").concat(this.playlist, "/videos").concat(segments ? '/' + segments : '');
+    }
+  }
 });
 
 /***/ }),
@@ -2353,7 +2543,322 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "form",
+    {
+      staticClass: "card",
+      attrs: { enctype: "multipart/form-data", method: "POST", action: "" }
+    },
+    [
+      _c("div", { staticClass: "card-body" }, [
+        _c("h3", { staticClass: "card-title" }, [
+          _vm._v("Upload Video in " + _vm._s(_vm.channel.name) + " Channel")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _vm.uid
+              ? _c("div", { staticClass: "alert alert-secondary" }, [
+                  _vm._v("Your video will be available at "),
+                  _c("a", { attrs: { href: _vm.videoUrl, target: "_blank" } }, [
+                    _vm._v(_vm._s(_vm.videoUrl))
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.uploadCompleted
+              ? _c("div", { staticClass: "alert alert-success" }, [
+                  _vm._v(
+                    "\n                    Upload successfully complete. Video is processing. "
+                  ),
+                  _c("a", { attrs: { href: "/videos" } }, [
+                    _vm._v("Go to you videos")
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.failed
+              ? _c("div", { staticClass: "alert alert-danger" }, [
+                  _vm._v("Something wrong happened! Please Try Once Again.")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { staticClass: "form-label" }, [
+                _vm._v("Select Playlist")
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.playlist,
+                      expression: "playlist"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.playlist = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "" } }, [_vm._v("Select")]),
+                  _vm._v(" "),
+                  _vm._l(_vm.playlists, function(name, slug) {
+                    return _c(
+                      "option",
+                      { key: slug, domProps: { value: slug } },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(name) +
+                            "\n                        "
+                        )
+                      ]
+                    )
+                  })
+                ],
+                2
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _vm.playlist
+            ? _c("div", { staticClass: "col-md-12" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    !_vm.uploadCompleted && !_vm.failed
+                      ? _c("label", { staticClass: "form-label" }, [
+                          _vm._v(
+                            _vm._s(
+                              !_vm.uploading
+                                ? "Upload Video"
+                                : "Video is Uploading ..."
+                            )
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    [
+                      !_vm.uploading || _vm.failed
+                        ? _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "file" },
+                            on: { change: _vm.changed }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      !_vm.uploadCompleted && _vm.uploading && !_vm.failed
+                        ? _c("div", { staticClass: "progress" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "progress-bar progress-bar-striped progress-bar-animated",
+                                style: { width: _vm.fileProgress + "%" },
+                                attrs: {
+                                  role: "progressbar",
+                                  "aria-valuenow": _vm.fileProgress,
+                                  "aria-valuemin": "0",
+                                  "aria-valuemax": "100"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(Math.round(_vm.fileProgress)) + "%"
+                                )
+                              ]
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.uploading && !_vm.failed
+                        ? _c("div", [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { staticClass: "form-label" }, [
+                                _vm._v("Title")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.title,
+                                    expression: "form.title"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.form.title },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "title",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { staticClass: "form-label" }, [
+                                _vm._v("Description")
+                              ]),
+                              _vm._v(" "),
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.description,
+                                    expression: "form.description"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { rows: "7" },
+                                domProps: { value: _vm.form.description },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "description",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { staticClass: "form-label" }, [
+                                _vm._v("Visibility")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.visibility,
+                                      expression: "form.visibility"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.form,
+                                        "visibility",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "private" } },
+                                    [_vm._v("Private")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "unlisted" } },
+                                    [_vm._v("Unlisted")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "public" } }, [
+                                    _vm._v("Public")
+                                  ])
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _vm.saveStatus
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass:
+                                      "float-right badge badge-secondary"
+                                  },
+                                  [_vm._v(_vm._s(_vm.saveStatus))]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              !_vm.loading
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-default",
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.update($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                    Save Changes\n                                "
+                                      )
+                                    ]
+                                  )
+                                : _c("span", { staticClass: "loader" })
+                            ])
+                          ])
+                        : _vm._e()
+                    ]
+                  ],
+                  2
+                )
+              ])
+            : _vm._e()
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -14498,7 +15003,8 @@ Vue.component('video-upload', __webpack_require__(/*! ./components/videos/Upload
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: window.site
 });
 
 /***/ }),

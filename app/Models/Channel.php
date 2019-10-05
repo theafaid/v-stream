@@ -34,8 +34,19 @@ class Channel extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function playlists()
     {
         return $this->hasMany(Playlist::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function videos()
+    {
+        return $this->hasManyThrough(Playlist::class, Video::class);
     }
 }

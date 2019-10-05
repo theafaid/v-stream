@@ -8,6 +8,18 @@ class Playlist extends Model
 {
     protected $guarded = [];
 
+    /**
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return "slug";
+    }
+
+    /**
+     * @param $user
+     * @return mixed
+     */
     public function ownedBy($user)
     {
         return $this->channel->ownedBy($user);
@@ -19,5 +31,13 @@ class Playlist extends Model
     public function channel()
     {
         return $this->belongsTo(Channel::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function videos()
+    {
+        return $this->hasMany(Video::class);
     }
 }
